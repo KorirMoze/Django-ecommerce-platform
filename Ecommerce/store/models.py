@@ -13,6 +13,7 @@ class Customer(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200,null=True)
     price = models.FloatField()
+    digital = models.BooleanField(default=False,null=True,blank=False)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
@@ -35,6 +36,17 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def shipping(self):
+        shipping=False
+        ordereditems = self.ordereditem_set.all()
+        for i in ordereditems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
+
+
     @property
     def get_cart_total(self):
         ordereditems = self.ordereditem_set.all()
