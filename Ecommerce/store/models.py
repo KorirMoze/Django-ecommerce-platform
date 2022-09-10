@@ -11,13 +11,16 @@ class Customer(models.Model):
         return self.name
 
 class Category(models.Model):
+    slug = models.CharField(max_length=200,null=True,blank=False)
     name = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=7,decimal_places=2 )
+    descriptions = models.TextField(max_length=500,null=True,blank=False)
     digital = models.BooleanField(default=False,null=True,blank=False)
     image = models.ImageField(null=True, blank=True)
     trending = models.BooleanField(default=False,help_text="0=default, 1=Trending") 
     meta_title = models.CharField(max_length=200,null=False,blank=False)
-    meta_keyword = models.CharField(max_length=200,null=False,blank=False)   
+    meta_keyword = models.CharField(max_length=200,null=False,blank=False)  
+    status = models.BooleanField(default=False,help_text="0=default, 1=Hidden") 
 
     
     def __str__(self):
@@ -25,12 +28,16 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
+    slug = models.CharField(max_length=200,null=True,blank=False)
     name = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=7,decimal_places=2 )
+    small_descriptions = models.CharField(max_length=500,null=True,blank=False)
+    descriptions = models.TextField(max_length=500,null=True,blank=False)
     digital = models.BooleanField(default=False,null=True,blank=False)
     image = models.ImageField(null=True, blank=True)
     trending = models.BooleanField(default=False,help_text="0=default, 1=Trending")
-
+    tag =  models.CharField(max_length=200,null=True,blank=False)
+    status = models.BooleanField(default=False,help_text="0=default, 1=Hidden")
     def __str__(self):
         return self.name
 
