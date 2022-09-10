@@ -44,7 +44,8 @@
 			<br>
 			<div class="box-element hidden" id="payment-info">
 				<small>Paypal Options</small>
-				<button id="make-payment"> Make Payment</button>
+				<div id="paypal-button-container"></div>
+				<!--<button id="make-payment"> Make Payment</button>-->
 			</div>
 			
 		</div>
@@ -68,9 +69,36 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://www.paypal.com/sdk/js?client-id=ATZYRLpRQhjlBzDcw6WpVdmZqbLPbTakIsjJH8oMG7aYpJIwJXpJ-mPJmQ7oTM_Ty0cNLI5j3uFjmiIE&currency=USD"></script>
+	<script>
+		var total =' {{order.get_cart_total}}'
+		paypal.Buttons({
+			style:{
+				color:'blue',
+				shape:'pill',
+
+			},
+			createOrder: function(data, actions) {
+				return actions.order.create({
+					purchase_units: [{
+						amount: {
+							value: parseFloat(total).toFixed(2)
+						}
+					}]
+				});
+			},
+			onApprove: function(data, actions){
+				return actions.order.capture().then(function(details){
+					submitFormData()
+				});
+			}
+
+		}).render('#paypal-button-container');
+	</script>
+
 	<script type="text/javascript">
 		var shipping = '{{order.shipping}}'
-		var total =' {{order.get_cart_total}}'
+		
 
 		if(shipping == 'False'){
 			document.getElementById('shipping-info').innerHTML = ''
@@ -98,9 +126,9 @@
 			document.getElementById('form-button').classList.add('hidden')
 			document.getElementById('payment-info').classList.remove('hidden')
 		 })
-		document.getElementById('make-payment').addEventListener('click', function(e){
+		/*document.getElementById('make-payment').addEventListener('click', function(e){
 			submitFormData()
-		})
+		})*/
 		function submitFormData(){ 
 			console.log('payment button clicked')
 

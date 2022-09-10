@@ -10,11 +10,26 @@ class Customer(models.Model):
     def __str__(self): 
         return self.name
 
-class Product(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=7,decimal_places=2 )
     digital = models.BooleanField(default=False,null=True,blank=False)
     image = models.ImageField(null=True, blank=True)
+    trending = models.BooleanField(default=False,help_text="0=default, 1=Trending") 
+    meta_title = models.CharField(max_length=200,null=False,blank=False)
+    meta_keyword = models.CharField(max_length=200,null=False,blank=False)   
+
+    
+    def __str__(self):
+        return self.name     
+
+class Product(models.Model):
+    category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
+    name = models.CharField(max_length=200,null=True)
+    price = models.DecimalField(max_digits=7,decimal_places=2 )
+    digital = models.BooleanField(default=False,null=True,blank=False)
+    image = models.ImageField(null=True, blank=True)
+    trending = models.BooleanField(default=False,help_text="0=default, 1=Trending")
 
     def __str__(self):
         return self.name
