@@ -1,9 +1,8 @@
 from calendar import c
-from email import message
 from multiprocessing import context
-from nis import cat
-from unicodedata import category
-from django.shortcuts import render
+from urllib import request
+
+from django.shortcuts import render,redirect
 from .models import*
 from django.http import JsonResponse
 import json
@@ -13,16 +12,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-def store(request):
 
-    data = cartData(request)
-    cartItems = data['cartItems']
- 
-
-    products = Product.objects.all()
-
-    context = {'products':products,'cartItems':cartItems}
-    return render (request, 'store/store.html',context)
 
 def cart(request):
 
@@ -107,25 +97,43 @@ def processOrder(request):
 
 def Collection(request):
     category = Category.objects.filter(status=0)
-    context={'category':category}
+    products = Product.objects.all()
+    context={'category':category,'products':products}
     return render(request,'store/collection.html', context)
+    
 
 def collectionView(request,slug):
     if(Category.objects.filter(slug=slug,status=0)):
-        product = Product.objects.filter(category__slug = slug)
-        category_name = category.objects.filter(slug=slug).first()
-        context = {'product':product,'category_name':category_name}
-        return render(request,'store/store.html',context)
+        products = Product.objects.filter(category__slug = slug)
+        category = Category.objects.filter(slug=slug).first()
+        context = {'products':products,'category':category}
+        return render(request,'store/trial.html',context)
     else:
         messages.warning(request, 'no such category')
+        return redirect('collections')
 
 def store(request):
 
-    data = cartData(request)
-    cartItems = data['cartItems']
- 
+        data = cartData(request)
+        cartItems = data['cartItems']
+      
+        products = Product.objects.all()
+        context = {'products':products,'cartItems':cartItems}
+        return render(request,'store/store.html',context)
 
-    products = Product.objects.all()
 
-    context = {'products':products,'cartItems':cartItems}
+def productView(request, cate_slug, prod_slug):
+    if(Category.objects.filter(slug=cate_slug, status=0)):
+        if(Product.objects.filter(slug=prod_slug,status=0)):
+            products=Product.objects.filter(slug=prod_slug,status=0).first()
+            context={'products':products}
+        else:
+            messages.error(request,'no such product')
+            return redirect('collection')
+    else:
+        messages.error(request,'no such category')
+        return redirect('collection')
+    return render(request,'store/productview.html',context)
+
+
     

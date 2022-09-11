@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" href="{% url 'store' %}" style=" text-decoration: none;">Home/</a>
+        <a class="text-white" href="{% url 'collection' %}" style=" text-decoration: none;">Collections/</a>
+        <a class="text-white" href="{% url 'collectionsView' category.slug %}" style=" text-decoration: none;">{{category.name}}</a>
+    </div>
+
+</div>
+<h1>{{category.name}}</h1>
+	<div class="row">
+		
+		{% for item in products %}
+		<div class="col-lg-4">
+            <a href="{% url 'productView' item.category.slug item.slug %}"style=" text-decoration: none;">
+                <div class="card">
+                <img class="thumbnail" src="{{item.imageURL}}">
+                    <div class="box-element product">
+                        <h6><strong>{{ item.name }}</strong></h6>
+                        <hr>
+
+
+                    </div>
+	        	</div>
+            </a>
+        </div>
+		{% endfor %}
+	</div>
+
+{% endblock content %}
