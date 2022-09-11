@@ -1,0 +1,32 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% include 'store/includes/navbar.html' %}
+
+
+{% block content %}
+{% include 'store/includes/navbar.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>collections</h1>
+            <hr>
+            <div class="row">
+                {% for item in category %}
+                <div class="col-lg-4">
+                    <a href="{% url 'collection'item.slug %}"
+                        <img src="{{item.imageURL}}" alt="Category Image" class="thumbnail"/>
+                        <div class="box-element product">
+                            <h6 class="text-center"><strong>{{ item.name }}</strong></h6>
+                            <hr>
+
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div> 
+
+    <div>
+</div>
+{% endblock %}

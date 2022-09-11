@@ -24,7 +24,15 @@ class Category(models.Model):
 
     
     def __str__(self):
-        return self.name     
+        return self.name   
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url  
 
 class Product(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)

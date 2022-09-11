@@ -1,10 +1,15 @@
 from calendar import c
+from email import message
+from multiprocessing import context
+from nis import cat
+from unicodedata import category
 from django.shortcuts import render
 from .models import*
 from django.http import JsonResponse
 import json
 import datetime
 from .utils import cookieCart,cartData,guestOrder
+from django.contrib import messages
 
 # Create your views here.
 
@@ -98,3 +103,29 @@ def processOrder(request):
             
 
     return JsonResponse('payment completed',safe=False) 
+
+
+def Collection(request):
+    category = Category.objects.filter(status=0)
+    context={'category':category}
+    return render(request,'store/collection.html', context)
+
+def collectionView(request,slug):
+    if(Category.objects.filter(slug=slug,status=0)):
+        product = Product.objects.filter(category__slug = slug)
+        category_name = category.objects.filter(slug=slug).first()
+        context = {'product':product,'category_name':category_name}
+        return render(request,'store/store.html',context)
+    else:
+        messages.warning(request, 'no such category')
+
+def store(request):
+
+    data = cartData(request)
+    cartItems = data['cartItems']
+ 
+
+    products = Product.objects.all()
+
+    context = {'products':products,'cartItems':cartItems}
+    
