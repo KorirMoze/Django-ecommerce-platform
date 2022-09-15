@@ -11,7 +11,14 @@ from .utils import cookieCart,cartData,guestOrder
 from django.contrib import messages
 
 # Create your views here.
+def store(request,):
 
+        data = cartData(request)
+        cartItems = data['cartItems']
+        category = Category.objects.filter(status=0)
+        products = Product.objects.all()
+        context = {'products':products,'cartItems':cartItems,'category':category,}
+        return render(request,'store/collection.html',context)
 
 
 def cart(request):
@@ -116,16 +123,6 @@ def collectionView(request,slug):
         messages.warning(request, 'no such category')
         return redirect('collections')
 
-def store(request):
-
-        data = cartData(request)
-        cartItems = data['cartItems']
-        category = Category.objects.filter(status=0)
-        products = Product.objects.all()
-        context = {'products':products,'cartItems':cartItems,'category':category,}
-        return render(request,'store/collection.html',context)
-
-
 def productView(request, cate_slug, prod_slug):
     if(Category.objects.filter(slug=cate_slug, status=0)):
         if(Product.objects.filter(slug=prod_slug,status=0)):
@@ -138,6 +135,24 @@ def productView(request, cate_slug, prod_slug):
         messages.error(request,'no such category')
         return redirect('collection')
     return render(request,'store/productview.html',context)
+
+
+def PView(request, cat_slug, pro_slug):
+    if(Category.objects.filter(slug=cat_slug, status=0)):
+        if(Product.objects.filter(slug=pro_slug,status=0)):
+            products=Product.objects.filter(slug=pro_slug,status=0).first()
+            context={'products':products}
+        else:
+            messages.error(request,'no such product')
+            return redirect('collection')
+    else:
+        messages.error(request,'no such category')
+        return redirect('collection')
+    return render(request,'store/pView.html',context)
+   
+
+
+    
 
 
     

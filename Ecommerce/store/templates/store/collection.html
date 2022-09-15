@@ -9,7 +9,7 @@
 <div class="py-3 bg-primary">
     <div class="container">
         <a class="text-white" none; href="{% url 'store' %}" style=" text-decoration: none;">Home/</a>
-        <a class="text-white" href="{% url 'collection' %}" style=" text-decoration: none;">Collections</a>
+        <a class="text-white" href="#" style=" text-decoration: none;">Collections</a>
     </div>
 
 </div>
@@ -50,9 +50,8 @@
                     <div class="box-element product">
                         <h6><strong>{{ product.name }}</strong></h6>
                         <hr>
-        
                         <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                        <a class="btn btn-outline-success" href="#">View</a>
+                        <a class="btn btn-outline-success" href="{% url 'pView' product.slug %}">View</a>
                         <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
         
                     </div>
