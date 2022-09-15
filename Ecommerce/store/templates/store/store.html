@@ -1,8 +1,40 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+<div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" none; href="{% url 'store' %}" style=" text-decoration: none;">Home/</a>
+        <a class="text-white" href="{% url 'collection' %}" style=" text-decoration: none;">Categories</a>
+    </div>
 
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          
+            <hr>
+            <div class="row">
+                {% for item in category %}
+                
+                <div class="col-lg-4">
+                    <a href="{% url 'collectionsView' item.slug %}"style=" text-decoration: none;">
+                        <div class="card">
+                            <img class="thumbnail" src="{{item.imageURL}}" alt="Category Image" />
+                            <div class="box-element product">
+                                <h6 class="text-center"><strong>{{ item.name }}</strong></h6>
+                                <hr>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+               
+                {% endfor %}
 
+            </div>
+        </div> 
+
+    <div>
+</div>
 	<div class="row">
 		{% for product in products %}
 		<div class="col-lg-4">

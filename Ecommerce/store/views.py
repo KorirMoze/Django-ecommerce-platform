@@ -96,17 +96,21 @@ def processOrder(request):
 
 
 def Collection(request):
+    data = cartData(request)
     category = Category.objects.filter(status=0)
     products = Product.objects.all()
-    context={'category':category,'products':products}
+    cartItems = data['cartItems']
+    context={'category':category,'products':products,'cartItems':cartItems}
     return render(request,'store/collection.html', context)
     
 
 def collectionView(request,slug):
+    data = cartData(request)
     if(Category.objects.filter(slug=slug,status=0)):
         products = Product.objects.filter(category__slug = slug)
+        cartItems = data['cartItems']
         category = Category.objects.filter(slug=slug).first()
-        context = {'products':products,'category':category}
+        context = {'products':products,'category':category,'cartItems':cartItems}
         return render(request,'store/trial.html',context)
     else:
         messages.warning(request, 'no such category')
@@ -116,10 +120,10 @@ def store(request):
 
         data = cartData(request)
         cartItems = data['cartItems']
-      
+        category = Category.objects.filter(status=0)
         products = Product.objects.all()
-        context = {'products':products,'cartItems':cartItems}
-        return render(request,'store/store.html',context)
+        context = {'products':products,'cartItems':cartItems,'category':category,}
+        return render(request,'store/collection.html',context)
 
 
 def productView(request, cate_slug, prod_slug):

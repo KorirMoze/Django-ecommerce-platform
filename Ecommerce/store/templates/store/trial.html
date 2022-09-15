@@ -1,6 +1,7 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+
 <div class="py-3 bg-primary">
     <div class="container">
         <a class="text-white" href="{% url 'store' %}" style=" text-decoration: none;">Home/</a>
@@ -12,19 +13,21 @@
 <h1>{{category.name}}</h1>
 	<div class="row">
 		
-		{% for item in products %}
+		{% for product in products %}
 		<div class="col-lg-4">
-            <a href="{% url 'productView' item.category.slug item.slug %}"style=" text-decoration: none;">
+           
                 <div class="card">
-                <img class="thumbnail" src="{{item.imageURL}}">
+                <img class="thumbnail" src="{{product.imageURL}}">
                     <div class="box-element product">
-                        <h6><strong>{{ item.name }}</strong></h6>
+                        <h6><strong>{{ product.name }}</strong></h6>
                         <hr>
 
-
+                        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        <a class="btn btn-outline-success" href="{% url 'productView' product.category.slug product.slug %}">View</a>
+                        <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
                     </div>
 	        	</div>
-            </a>
+         
         </div>
 		{% endfor %}
 	</div>
