@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -11,7 +12,7 @@ class Customer(models.Model):
         return self.name
 
 class Category(models.Model):
-    slug = models.CharField(max_length=200,null=True,blank=False)
+    slug = models.SlugField(max_length=200,null=True,blank=False)
     name = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=7,decimal_places=2 )
     descriptions = models.TextField(max_length=500,null=True,blank=False)
@@ -36,7 +37,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,blank=True,null=True)
-    slug = models.CharField(max_length=200,null=True,blank=False)
+    slug = models.SlugField(max_length=200,null=True,blank=False)
     name = models.CharField(max_length=200,null=True)
     price = models.DecimalField(max_digits=7,decimal_places=2 )
     old_price =  models.DecimalField(max_digits=7,decimal_places=2,null=True,)
@@ -58,6 +59,15 @@ class Product(models.Model):
         except:
             url = ''
         return url
+
+
+class ProductImage(models.Model):
+    products = models.ForeignKey(Product,on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True)
+    def __str__(self):
+        return self.product.name
+
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)

@@ -1,8 +1,9 @@
 from calendar import c
+from gc import get_objects
 from multiprocessing import context
 from urllib import request
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import*
 from django.http import JsonResponse
 import json
@@ -137,17 +138,19 @@ def productView(request, cate_slug, prod_slug):
     return render(request,'store/productview.html',context)
 
 
-def PView(request, cat_slug, pro_slug):
-    if(Category.objects.filter(slug=cat_slug, status=0)):
-        if(Product.objects.filter(slug=pro_slug,status=0)):
-            products=Product.objects.filter(slug=pro_slug,status=0).first()
-            context={'products':products}
-        else:
-            messages.error(request,'no such product')
-            return redirect('collection')
-    else:
-        messages.error(request,'no such category')
-        return redirect('collection')
+def PView(request, id, slug):
+    category = Category.objects.all()
+   #products = Product.objects.filter(slug=pro_slug,status=0)
+    product=Product.objects.get(pk=id) 
+    context={'product':product,'category':category}
+     
+    return render(request,'store/pView.html',context)
+
+def view(request, pk, *args, **kwargs ):
+    #product = Product.objects.get(id=pk)
+    product = get_object_or_404(Product,id=pk)
+    context = {'product':product}
+
     return render(request,'store/pView.html',context)
    
 
