@@ -14,4 +14,8 @@ urlpatterns = [
 	path('productView/<str:cate_slug>/<str:prod_slug>/',views.productView,name="productView"),
 	path('pView/<int:id><str:slug>/', views.PView, name="pView"),
 	path('view/<str:pk>/', views.view, name="view"),
+	path('login/',views.loginpage, name="login"),
+	path('register/',views.register, name="register"),
+	path('logou/',views.logout, name="logout"),
+
 ]
