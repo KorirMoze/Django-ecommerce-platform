@@ -107,9 +107,9 @@
 	
 		 {% else %}
 			<!-- Not Logged In -->
-		   <a href="#">
+			<a href="{% url 'login' %}"class="btn btn-outline-warning">Login</a>
 			<img src="{% static 'images/avatar.svg' %}" />
-			<p>Login</p>
+			
 			</a> 
 	
 			<!-- Logged In -->
@@ -124,7 +124,7 @@
 		  </svg>
 		  Settings</a>
 	
-		<a href="#" class="dropdown-link"
+		<a href="{% url 'logout' %}" class="dropdown-link"
 		  ><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
 			<title>sign-out</title>
 			<path
@@ -139,7 +139,7 @@
 	</nav>
 	<div class="form-inline my-2 my-lg-0">
 		<div class="search-bar">
-			<a href="#"class="btn btn-outline-warning">Login</a>
+			
 			<a href="{% url 'cart' %}">
 				<img  id="cart-icon" src="{% static 'images/cart.png' %}">
 			</a>

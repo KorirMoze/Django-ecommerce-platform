@@ -1,12 +1,17 @@
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class Customer(models.Model):
-    user = models.OneToOneField(User,null=True,on_delete=models.CASCADE,blank=True)
+    user = models.OneToOneField(User,unique=True,on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=200,null=True)
+    username = models.CharField(max_length=200,unique=True,null=True)
+    
     email = models.CharField(max_length=200,null=True)
+    password1 = models.CharField(max_length=16,null=True)
+    password2 = models.CharField(max_length=16,null=True)
 
     def __str__(self): 
         return self.name

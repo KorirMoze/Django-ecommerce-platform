@@ -13,19 +13,23 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import createUserForm
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def register(request):
-    form = createUserForm()
-    if request.method == 'POST':
-        form = createUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request,'Account was created ' + user)
-            return redirect('login')
+    if request.user.is_authenticated:
+        return redirect('store')
+    else:
+        form = createUserForm()
+        if request.method == 'POST':
+            form = createUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request,'Account was created ' + user)
+                return redirect('login')
 
-    context = {'form':form}
-    return render(request,'store/register.html',context)
+        context = {'form':form}
+        return render(request,'store/register.html',context)
 
 def loginpage(request):
 
@@ -40,7 +44,9 @@ def loginpage(request):
             return redirect('store')
     context = {}
     return render(request,'store/login.html',context)
-def logout(request):
+
+def logoutpage(request):
+    logout(request)
     return redirect('store')
 
 def store(request,):
