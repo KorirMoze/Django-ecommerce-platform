@@ -1,6 +1,8 @@
+import email
 import json
+from unicodedata import name
 from.models import *
-from .forms import createUserForm
+
 def cookieCart(request):
        
         try:
@@ -46,7 +48,12 @@ def cookieCart(request):
 
 def cartData(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer,created = Customer.objects.get_or_create(
+            email=email,
+        )
+        customer.name = name
+        customer.save()
+        
         order, created = Order.objects.get_or_create(customer=customer,complete=False)
         items= order.ordereditem_set.all()
         cartItems = order.get_cart_items
