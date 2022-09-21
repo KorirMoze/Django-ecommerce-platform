@@ -93,8 +93,15 @@ def updateItem(request):
 
     print('action:', action)
     print('productId:', productId)
+    user = request.user
+    customer,created = Customer.objects.get_or_create(
+        email=user.email,
+        username = user.username,
 
-    customer = request.user.customer
+            
+        )
+    customer.name = user.username
+    customer.save()
     product = Product.objects.get(id=productId)
     order,created = Order.objects.get_or_create(customer=customer,complete=False)
 
@@ -196,9 +203,17 @@ def view(request, pk, *args, **kwargs ):
 
     return render(request,'store/pView.html',context)
    
+def UserProfile(request,pk):
+    user = User.objects.get(id=pk)
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {'user':user,'cartItems':cartItems}
+    return render(request,'store/profile.html',context)
 
 
-    
+def updateUser(request):
+    context = {}
+    return render(request,'store/update_profile.html')
 
 
     

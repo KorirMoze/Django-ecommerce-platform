@@ -1,0 +1,41 @@
+{% extends 'store/main.html' %}
+{% block content %}
+
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{user.username}}</h3>
+            <p>@{{user.username}}</p>
+            <a href="{% url 'edit-profile' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          </div>
+          <div class="profile__about">
+            <h3>About</h3>
+            <p>
+            {{user.order}}
+            </p>
+          </div>
+        </div>
+
+     
+        
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+    
+      <!-- Activities End -->
+    </div>
+  </main>
+{% endblock %}

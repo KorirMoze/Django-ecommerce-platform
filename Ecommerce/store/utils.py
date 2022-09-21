@@ -48,10 +48,14 @@ def cookieCart(request):
 
 def cartData(request):
     if request.user.is_authenticated:
+        user = request.user
         customer,created = Customer.objects.get_or_create(
-            email=email,
+            email=user.email,
+            username = user.username,
+
+            
         )
-        customer.name = name
+        customer.name = user.username
         customer.save()
         
         order, created = Order.objects.get_or_create(customer=customer,complete=False)
