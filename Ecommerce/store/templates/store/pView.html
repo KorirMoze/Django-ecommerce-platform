@@ -31,11 +31,21 @@
             {{product.small_descriptions}}
         </p>  
         <hr>
-        {% if product.quantity > 0 %}
+      
           <label class="badge bg-sucess">In stock</label>
-        {% else %}
-        <label class="badge bg-danger">Out of stock</label>
-        {% endif %}
+
+        <hr>
+        <div class="cart-row">
+        
+            <div style="flex:0.1">
+                <p class="quantity">{{item.quantity}}</p>
+                <div class="quantity">
+                    <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+        
+                <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+            </div>
+        </div>
+        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
     </div>
     <div class="col-md-12">
         <hr>

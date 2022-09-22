@@ -175,10 +175,12 @@ def collectionView(request,slug):
         return redirect('collections')
 
 def productView(request, cate_slug, prod_slug):
+    data = cartData(request)
+    cartItems = data['cartItems']
     if(Category.objects.filter(slug=cate_slug, status=0)):
         if(Product.objects.filter(slug=prod_slug,status=0)):
             products=Product.objects.filter(slug=prod_slug,status=0).first()
-            context={'products':products}
+            context={'products':products,'cartItems':cartItems}
         else:
             messages.error(request,'no such product')
             return redirect('collection')
@@ -189,17 +191,27 @@ def productView(request, cate_slug, prod_slug):
 
 
 def PView(request, id, slug):
+    data = cartData(request)
+    cartItems = data['cartItems']
     category = Category.objects.all()
    #products = Product.objects.filter(slug=pro_slug,status=0)
     product=Product.objects.get(pk=id) 
-    context={'product':product,'category':category}
+
+  
+
+    context={'product':product,'category':category,'cartItems':cartItems}
      
     return render(request,'store/pView.html',context)
 
 def view(request, pk, *args, **kwargs ):
     #product = Product.objects.get(id=pk)
+    data = cartData(request)
+    cartItems = data['cartItems']
     product = get_object_or_404(Product,id=pk)
-    context = {'product':product}
+
+    
+
+    context = {'product':product,'cartItems':cartItems}
 
     return render(request,'store/pView.html',context)
    

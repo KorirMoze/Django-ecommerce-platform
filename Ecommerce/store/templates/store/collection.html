@@ -17,23 +17,26 @@
 
 <div style="margin-top: 2em;">
     <div class="row">
-        <div class="col-md-12">
-            <h5>Collections</h5>
+        <div class="col-md-12"style="margin-top: 2em;">
+            <strong><h5>Categories</h5></strong>
             <hr>
             <div class="row">
                 {% for item in category %}
                 
                 <div class="col-lg-3">
-                    <a href="{% url 'collectionsView' item.slug %}"style=" text-decoration: none;">
+                   
                         <div class="card">
                             <img class="thumbnail" src="{{item.imageURL}}" alt="Category Image" />
                             <div class="box-element product">
                                 <h6 class="text-center"><strong>{{ item.name }}</strong></h6>
-                                <hr>
                                 
+                                <a href="{% url 'collectionsView' item.slug %}"class="text-center" >
+                                    <h6 ><strong>View More</strong></h6>
+                                 </a>
+                                <hr>
                             </div>
                         </div>
-                    </a>
+                   
                 </div>
                
                 {% endfor %}
