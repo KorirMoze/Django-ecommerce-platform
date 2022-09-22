@@ -1,3 +1,4 @@
+from xml.etree.ElementInclude import include
 from django.urls import path
 
 from .import views
@@ -18,6 +19,7 @@ urlpatterns = [
 	path('register/',views.register, name="register"),
 	path('logout/',views.logoutpage, name="logout"),
 	path('profile/<str:pk>/',views.UserProfile,name="user-profile"),
-	path('edit-profile/', views.updateUser,name="edit-profile")
+	path('edit-profile/', views.updateUser,name="edit-profile"),
+	path('other/', include('other.urls'))
 
 ]
