@@ -20,6 +20,6 @@ urlpatterns = [
 	path('logout/',views.logoutpage, name="logout"),
 	path('profile/<str:pk>/',views.UserProfile,name="user-profile"),
 	path('edit-profile/', views.updateUser,name="edit-profile"),
-	path('other/', include('other.urls'))
+	
 
 ]
