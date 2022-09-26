@@ -9,7 +9,7 @@ h1,h2,h3,h4,h5,h6{
 .box-element{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
-	border-radius: 4px;
+	border-radius: 10px;
 	padding: 10px;
 }
 
@@ -62,6 +62,7 @@ h1,h2,h3,h4,h5,h6{
 	width:250px;
 	display: inline-block;
 	padding: 5px;
+ 
 }
 
 .cart-row{
@@ -159,7 +160,7 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-size: 1.5rem;
-  color: var(--color-gray);
+  color: var(--color-light-gray);
 
   min-height: 100vh;
 }
@@ -381,21 +382,20 @@ a {
 
 .header {
   padding: 1.5rem;
-  background-color: var(--color-dark);
+  background-color: var(--color-light-gray);
 }
 
-.header > .container {
-  display: flex;
-  gap: 3.5rem;
-}
 
-.header__logo,
-.header__user {
+.header__logo{
   display: flex;
   gap: 2rem;
-  align-items: center;
+  align-items: right;
 }
-
+.header__user{
+  display: flex;
+  gap: 2rem;
+  float: right;
+} 
 .header__logo > img {
   height: 3.2rem;
   width: 3.2rem;
@@ -464,7 +464,7 @@ a {
   gap: 1.5rem;
   align-items: center;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: blueviolet;
   color: var(--color-gray);
 }
 
@@ -497,266 +497,17 @@ a {
 }
 
 .dropdown-button:hover svg {
-  fill: var(--color-main);
+  fill: var(--color-blue);
 }
 
 /*==============================
 =>  Layout
 ================================*/
 
-.layout {
-  margin-top: 2.4rem;
-}
-
-.layout > .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.layout--3 > .container > div:first-child {
-  flex-basis: 18%;
-  max-width: 22.5rem;
-}
-
-.layout--3 > .container > div:nth-child(2) {
-  flex-basis: 50%;
-}
-
-.layout--3 > .container > div:last-child {
-  flex-basis: 25%;
-}
-
-.layout--2 > .container > div:first-child {
-  flex-basis: 72%;
-}
-
-.layout--2 > .container > div:last-child {
-  flex-basis: 25%;
-}
-/*========== Layout Box ==========*/
-
-.layout__box {
-  width: 90%;
-  max-width: 48rem;
-  min-height: 40rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -46%);
-  background-color: var(--color-dark);
-  border-radius: 1rem;
-  box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.layout__boxHeader {
-  display: flex;
-  padding: 1.5rem;
-  background-color: var(--color-dark-light);
-}
-
-.layout__boxTitle {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.layout__boxTitle h3 {
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--color-light);
-}
-
-.layout__boxTitle svg {
-  width: 1.6rem;
-  height: 1.6rem;
-  fill: var(--color-main);
-}
-
-.layout__body {
-  margin: 3rem;
-}
-
-@media screen and (max-width: 900px) {
-  .activities,
-  .topics {
-    display: none;
-  }
-
-  .layout--3 > .container > div:nth-child(2) {
-    flex-basis: 100%;
-  }
-}
 
 /*==============================
 =>  Topics
 ================================*/
-
-.form__group {
-  margin-bottom: 2rem;
-  width: 100%;
-}
-
-.form__split {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.form__group label {
-  display: block;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.form__group input,
-.form__group textarea,
-.form__group select {
-  background: transparent;
-  border: 1px solid var(--color-dark-light);
-  padding: 1rem;
-  border-radius: 3px;
-  width: 100%;
-  color: var(--color-light);
-  font-weight: 500;
-  outline: none;
-}
-
-.form__group input:focus,
-.form__group textarea:focus {
-  border-color: var(--color-main);
-}
-
-.form__group textarea {
-  background: transparent;
-  height: 10rem;
-  resize: none;
-}
-
-.form__group select {
-  color: var(--color-gray);
-  font-weight: 400;
-}
-
-.form__group select option {
-  background-color: var(--color-dark-light);
-  color: var(--color-light);
-  padding: 0 10rem;
-}
-
-.form__action {
-  display: flex;
-  justify-content: flex-end;
-  gap: 3rem;
-}
-
-.form__hide {
-  position: absolute;
-  left: -9999px;
-}
-
-.form__avatar label {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: var(--color-main);
-  cursor: pointer;
-}
-
-.form__avatar label:hover {
-  text-decoration: underline;
-}
-
-
-/*==============================
-=>  Room List
-================================*/
-
-/*========== Room List Room ==========*/
-
-
-
-
-/*==============================
-=>  Activities
-================================*/
-
-
-
-
-/*==============================
-=>  Create Room
-================================*/
-
-.create-room.layout .layout__box {
-  max-width: 68rem;
-}
-
-/*==============================
-
-/*==============================
-=>  Settings
-================================*/
-
-/*==============================
-=>  Profile
-================================*/
-.profile {
-  margin-bottom: 3rem;
-}
-
-.profile__avatar {
-  text-align: center;
-}
-
-.profile__info {
-  text-align: center;
-}
-
-.profile__info h3 {
-  font-size: 2rem;
-  color: var(--color-light);
-  font-weight: 400;
-}
-
-.profile__info p {
-  color: var(--color-main);
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.profile__about {
-  margin-top: 2rem;
-}
-
-.profile__about h3 {
-  text-transform: uppercase;
-  color: var(--color-dark-light);
-  margin-bottom: 0.5rem;
-}
-
-.profile-page .roomList__header {
-  margin-bottom: 1.5rem;
-}
-
-.profile-page .roomList__header h2 {
-  color: var(--color-dark-light);
-}
-
-/*==============================
-=>  Room
-================================*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 

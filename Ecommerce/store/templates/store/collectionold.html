@@ -1,0 +1,76 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% include 'store/includes/navbar.html' %}
+
+
+{% block content %}
+
+
+<div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" none; href="{% url 'store' %}" style=" text-decoration: none;">Home/</a>
+        <a class="text-white" href="#" style=" text-decoration: none;">Collections</a>
+    </div>
+
+</div>
+{% include 'store/includes/slider.html' %}
+
+<div style="margin-top: 2em;">
+    <div class="row">
+        <div class="col-md-12"style="margin-top: 2em;">
+            <strong><h5>Categories</h5></strong>
+            <hr>
+            <div class="row">
+                {% for item in category %}
+                
+                <div class="col-lg-3">
+                   
+                        <div class="card">
+                            <img class="thumbnail" src="{{item.imageURL}}" alt="Category Image" />
+                            <div class="box-element product">
+                                <h6 class="text-center"><strong>{{ item.name }}</strong></h6>
+                                
+                                <a href="{% url 'collectionsView' item.slug %}"class="text-center" >
+                                    <h6 ><strong>View More</strong></h6>
+                                 </a>
+                                <hr>
+                            </div>
+                        </div>
+                   
+                </div>
+               
+                {% endfor %}
+
+            </div>
+        </div> 
+        <div class="col-md-12"style="margin-top: 2em;">
+            <h5>Products</h5>
+            <hr>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4">
+                    <img class="thumbnail" src="{{product.imageURL}}">
+                    <div class="box-element product">
+                        <h6><strong>{{ product.name }}</strong></h6>
+                        <hr>
+                        
+                        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        <a class="btn btn-outline-success" href=" {% url 'view' product.id %}">View</a>
+                        <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+        
+                    </div>
+                </div>
+        
+                {% endfor %}
+
+            </div>
+        </div> 
+    <div>
+   
+
+ 
+</div>
+
+
+
+{% endblock %}
