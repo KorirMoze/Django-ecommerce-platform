@@ -886,12 +886,14 @@ ol {
 	color: #ffffff;
 	transform: rotate(360deg);
 }
-.featured__item__pic__hover li:hover bu {
+.featured__item__pic__hover li:hover button {
 	background: #7fad39;
+	border-radius: 70%;
 	border-color: #7fad39;
 }
 .featured__item__pic__hover li:hover button i  {
 	color: #ffffff;
+	border-radius: 70%;
 	transform: rotate(360deg);
 }
 .featured__item__pic__hover li a {
@@ -925,6 +927,13 @@ ol {
 .featured__item__text {
 	text-align: center;
 	padding-top: 15px;
+}
+.featured__item__tex {
+	text-align: center;
+	padding-top: 5px;
+}
+.featured__item__tex h6 {
+	margin-bottom: 10px;
 }
 
 .featured__item__text h6 {
