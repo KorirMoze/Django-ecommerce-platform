@@ -10,24 +10,26 @@
     </div>
 
 </div>
-<h1>{{category.name}}</h1>
+<h3>{{category.name}}</h3>
 	<div class="row">
 		
 		{% for product in products %}
-		<div class="col-lg-4">
-           
+		<div class="col-lg-4 col-md-4 col-sm-6 ">
+            <div class="featured__item">
                 <div class="card">
-                <img class="thumbnail" src="{{product.imageURL}}">
-                    <div class="box-element product">
+                  <img class="thumbnail" src="{{product.imageURL}}">
+                    <div class="featured__item__text">
                         <h6><strong>{{ product.name }}</strong></h6>
                         <hr>
-
+                        <br>
+                      
+                       
                         <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
                         <a class="btn btn-outline-success" href="{% url 'productView' product.category.slug product.slug %}">View</a>
                         <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
                     </div>
 	        	</div>
-          
+        </div>  
         </div>
 		{% endfor %}
 	</div>

@@ -382,8 +382,26 @@ a {
 
 .header {
   padding: 1.5rem;
+
   background-color: var(--color-light-gray);
 }
+#topRightFixed {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+}
+.containerc {
+	max-width: 120rem;
+	width: 90%;
+  margin-top: 20rem;
+  margin-left: auto;
+  margin-right: auto ;
+
+  }
+
 
 
 .header__logo{
@@ -698,5 +716,7 @@ a {
 }
 
 
-
+py-3{
+  margin-top: 23rem;
+}
 
