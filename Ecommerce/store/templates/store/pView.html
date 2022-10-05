@@ -16,8 +16,17 @@
         {% if product.tag %}
             <label class="product-viewtag">{{products.tag}}</label>
         {% endif %}
-        <img src="{{ product.imageURL }}" class="w-100" alt="image">
+        <img src="{{ product.imageURL }}" class="img-fluid" alt="image">
+        <br>
+        <div class="row" >
+            {% for pi in product.productimage_set.all %}
+            <div class="col md-4 p-3" style="height: 100px;object-fit:contain">
+                <img src="{{pi.image.url }}" class="img-fluid" alt="images">
+            </div>
+            {% endfor %}
+        </div>
     </div>
+
     <div class="col-md-8">
         <h2 class="mb-0">
         {{product.name}} 
@@ -40,15 +49,16 @@
             <div style="flex:0.1">
                 <p class="quantity">{{item.quantity}}</p>
                 <div class="quantity">
-                    <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+                  
         
-                <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+                
             </div>
+        
         </div>
         <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
     </div>
     <div class="col-md-12">
-        <hr>
+     
         <h3>Description</h3>
         <p class="mt-3">
             {{product.descriptions}}

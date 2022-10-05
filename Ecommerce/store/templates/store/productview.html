@@ -18,6 +18,13 @@
         {% endif %}
         <img src="{{ products.imageURL }}" class="w-100" alt="image">
     </div>
+    <div class="row">
+        {% for pi in products.productimage_set.all %}
+        <div class="col md-4">
+            <img src="{{pi.image.url}}" class="img-fluid" alt="images">
+        </div>
+        {% endfor %}
+    </div>
     <div class="col-md-8">
         <h2 class="mb-0">
         {{products.name}} 
